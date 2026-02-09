@@ -1,0 +1,5163 @@
+{
+  "name": "Rotina Matinal 06h",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Cron 06h",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -2384,
+        272
+      ],
+      "id": "01e2d8f2-2332-48cd-82a7-c600f4138b19"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "sesab_mnascimento@hcpa.edu.br",
+          "mode": "list",
+          "cachedResultName": "sesab_mnascimento@hcpa.edu.br"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "name": "Eventos do Dia",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        -1216,
+        80
+      ],
+      "id": "8e1838cd-acbc-494c-b0ed-a01ad7c6f5b6",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "e0iCGyTCnFW8vnZ0",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.openrouteservice.org/v2/directions/driving-car",
+        "options": {},
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Accept",
+              "value": "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "end",
+              "value": "-38.2755984, -12.8398822"
+            },
+            {
+              "name": "start",
+              "value": "-38.4304099, -12.9451544"
+            },
+            {
+              "name": "api_key",
+              "value": "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjAzOWUwOGE0MzYwNjQ0MjJiYWJiNmE5MDY1MjFhMTJmIiwiaCI6Im11cm11cjY0In0="
+            }
+          ]
+        }
+      },
+      "name": "Tempo até Trabalho",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        272
+      ],
+      "id": "a52da227-e532-4d93-878a-fa1b7ec2792a"
+    },
+    {
+      "parameters": {
+        "url": "https://gnews.io/api/v4/top-headlines",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "lang",
+              "value": "pt"
+            },
+            {
+              "name": "country",
+              "value": "br"
+            },
+            {
+              "name": "max",
+              "value": "5"
+            },
+            {
+              "name": "apikey",
+              "value": "={{$env.GNEWS_API_KEY}}"
+            }
+          ]
+        }
+      },
+      "name": "Noticias do Dia",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        464
+      ],
+      "id": "54236f2e-bba1-44b5-af69-fffa2e182547"
+    },
+    {
+      "parameters": {
+        "url": "https://bible-api.com/john+3:16?translation=almeida",
+        "options": {}
+      },
+      "name": "Versiculo Biblico",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        656
+      ],
+      "id": "c7eca3c2-3cf3-4517-baf9-5f0eba483542"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "getAll",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "name": "Enviar Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        -1216,
+        848
+      ],
+      "id": "17e4b3cd-64d1-4455-a06c-4ffb84ed811c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XC3HRsDoTPxlOwGk",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 7
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -576,
+        192
+      ],
+      "id": "01d37cb4-d13b-4073-a6cb-d24ec8f56772",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/forecast",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "appid",
+              "value": "a48e69dcec732a3ba8cfc0261ba25cf8"
+            },
+            {
+              "name": "units",
+              "value": "metric"
+            },
+            {
+              "name": "lang",
+              "value": "pt_br"
+            },
+            {
+              "name": "lat",
+              "value": "-12.700085"
+            },
+            {
+              "name": "lon",
+              "value": "-38.3266152"
+            }
+          ]
+        }
+      },
+      "name": "Obter clima em Abrantes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        -304
+      ],
+      "id": "d0793eb9-819f-4af1-accf-54b9c4fc472a"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/forecast",
+        "options": {},
+        "queryParametersUi": {
+          "parameter": [
+            {
+              "name": "appid",
+              "value": "a48e69dcec732a3ba8cfc0261ba25cf8"
+            },
+            {
+              "name": "units",
+              "value": "metric"
+            },
+            {
+              "name": "lang",
+              "value": "pt_br"
+            },
+            {
+              "name": "lat",
+              "value": "-12.9714"
+            },
+            {
+              "name": "lon",
+              "value": "-38.5014"
+            }
+          ]
+        }
+      },
+      "name": "Obter clima em Salvador",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        -112
+      ],
+      "id": "7304bfa6-ebf3-489e-a6ba-589c5232c993"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "list[0].main.temp",
+              "renameField": true,
+              "outputFieldName": "tempAbrantes"
+            },
+            {
+              "fieldToAggregate": "list[0].weather[0].description",
+              "renameField": true,
+              "outputFieldName": "tempDescricaoAbrantes"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        -208
+      ],
+      "id": "f3c537a1-3f17-4d9b-ae91-c33dc154ec04",
+      "name": "Aggregate"
+    }
+  ],
+  "pinData": {
+    "Obter clima em Salvador": [
+      {
+        "json": {
+          "cod": "200",
+          "message": 0,
+          "cnt": 40,
+          "list": [
+            {
+              "dt": 1770649200,
+              "main": {
+                "temp": 30.79,
+                "feels_like": 37.79,
+                "temp_min": 27.63,
+                "temp_max": 30.79,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 75,
+                "temp_kf": 3.16
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01d"
+                }
+              ],
+              "clouds": {
+                "all": 6
+              },
+              "wind": {
+                "speed": 5.64,
+                "deg": 120,
+                "gust": 5.89
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-09 15:00:00"
+            },
+            {
+              "dt": 1770660000,
+              "main": {
+                "temp": 29.88,
+                "feels_like": 36.23,
+                "temp_min": 28.07,
+                "temp_max": 29.88,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1012,
+                "humidity": 76,
+                "temp_kf": 1.81
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 15
+              },
+              "wind": {
+                "speed": 9.46,
+                "deg": 101,
+                "gust": 9.92
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.31
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-09 18:00:00"
+            },
+            {
+              "dt": 1770670800,
+              "main": {
+                "temp": 28.35,
+                "feels_like": 32.99,
+                "temp_min": 27.13,
+                "temp_max": 28.35,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1012,
+                "humidity": 80,
+                "temp_kf": 1.22
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 9
+              },
+              "wind": {
+                "speed": 10.55,
+                "deg": 80,
+                "gust": 12.39
+              },
+              "visibility": 10000,
+              "pop": 0.31,
+              "rain": {
+                "3h": 0.13
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-09 21:00:00"
+            },
+            {
+              "dt": 1770681600,
+              "main": {
+                "temp": 26.93,
+                "feels_like": 29.68,
+                "temp_min": 26.93,
+                "temp_max": 26.93,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1013,
+                "humidity": 81,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 8
+              },
+              "wind": {
+                "speed": 9.32,
+                "deg": 58,
+                "gust": 12.7
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 00:00:00"
+            },
+            {
+              "dt": 1770692400,
+              "main": {
+                "temp": 26.76,
+                "feels_like": 29.22,
+                "temp_min": 26.76,
+                "temp_max": 26.76,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 80,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 7
+              },
+              "wind": {
+                "speed": 6.05,
+                "deg": 58,
+                "gust": 8.87
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 03:00:00"
+            },
+            {
+              "dt": 1770703200,
+              "main": {
+                "temp": 26.04,
+                "feels_like": 26.04,
+                "temp_min": 26.04,
+                "temp_max": 26.04,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1013,
+                "humidity": 82,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03n"
+                }
+              ],
+              "clouds": {
+                "all": 36
+              },
+              "wind": {
+                "speed": 4.4,
+                "deg": 41,
+                "gust": 6.64
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 06:00:00"
+            },
+            {
+              "dt": 1770714000,
+              "main": {
+                "temp": 25.58,
+                "feels_like": 26.41,
+                "temp_min": 25.58,
+                "temp_max": 25.58,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 85,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 99
+              },
+              "wind": {
+                "speed": 3.07,
+                "deg": 20,
+                "gust": 4.39
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.12
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 09:00:00"
+            },
+            {
+              "dt": 1770724800,
+              "main": {
+                "temp": 27.25,
+                "feels_like": 29.78,
+                "temp_min": 27.25,
+                "temp_max": 27.25,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1016,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 80
+              },
+              "wind": {
+                "speed": 3.09,
+                "deg": 68,
+                "gust": 4.38
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.37
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 12:00:00"
+            },
+            {
+              "dt": 1770735600,
+              "main": {
+                "temp": 27.82,
+                "feels_like": 30.57,
+                "temp_min": 27.82,
+                "temp_max": 27.82,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 72,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 16
+              },
+              "wind": {
+                "speed": 7.49,
+                "deg": 113,
+                "gust": 7.26
+              },
+              "visibility": 10000,
+              "pop": 0.39,
+              "rain": {
+                "3h": 0.16
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 15:00:00"
+            },
+            {
+              "dt": 1770746400,
+              "main": {
+                "temp": 27.88,
+                "feels_like": 30.56,
+                "temp_min": 27.88,
+                "temp_max": 27.88,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1012,
+                "humidity": 71,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 801,
+                  "main": "Clouds",
+                  "description": "algumas nuvens",
+                  "icon": "02d"
+                }
+              ],
+              "clouds": {
+                "all": 15
+              },
+              "wind": {
+                "speed": 8.02,
+                "deg": 104,
+                "gust": 8.29
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 18:00:00"
+            },
+            {
+              "dt": 1770757200,
+              "main": {
+                "temp": 27.18,
+                "feels_like": 29.74,
+                "temp_min": 27.18,
+                "temp_max": 27.18,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 76,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01d"
+                }
+              ],
+              "clouds": {
+                "all": 6
+              },
+              "wind": {
+                "speed": 7.81,
+                "deg": 92,
+                "gust": 8.6
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 21:00:00"
+            },
+            {
+              "dt": 1770768000,
+              "main": {
+                "temp": 26.89,
+                "feels_like": 29.07,
+                "temp_min": 26.89,
+                "temp_max": 26.89,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 10
+              },
+              "wind": {
+                "speed": 7.4,
+                "deg": 88,
+                "gust": 8.48
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 00:00:00"
+            },
+            {
+              "dt": 1770778800,
+              "main": {
+                "temp": 26.66,
+                "feels_like": 26.66,
+                "temp_min": 26.66,
+                "temp_max": 26.66,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1013,
+                "humidity": 74,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 88
+              },
+              "wind": {
+                "speed": 5.38,
+                "deg": 91,
+                "gust": 6.29
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 03:00:00"
+            },
+            {
+              "dt": 1770789600,
+              "main": {
+                "temp": 26.27,
+                "feels_like": 26.27,
+                "temp_min": 26.27,
+                "temp_max": 26.27,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 78,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 86
+              },
+              "wind": {
+                "speed": 3.81,
+                "deg": 103,
+                "gust": 4.58
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 06:00:00"
+            },
+            {
+              "dt": 1770800400,
+              "main": {
+                "temp": 26.37,
+                "feels_like": 26.37,
+                "temp_min": 26.37,
+                "temp_max": 26.37,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 78,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 14
+              },
+              "wind": {
+                "speed": 3.24,
+                "deg": 125,
+                "gust": 3.7
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.12
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 09:00:00"
+            },
+            {
+              "dt": 1770811200,
+              "main": {
+                "temp": 27.03,
+                "feels_like": 29.16,
+                "temp_min": 27.03,
+                "temp_max": 27.03,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1016,
+                "humidity": 73,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 9
+              },
+              "wind": {
+                "speed": 3.25,
+                "deg": 108,
+                "gust": 3.82
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.03
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 12:00:00"
+            },
+            {
+              "dt": 1770822000,
+              "main": {
+                "temp": 27.51,
+                "feels_like": 30.19,
+                "temp_min": 27.51,
+                "temp_max": 27.51,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 74,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 4
+              },
+              "wind": {
+                "speed": 5.63,
+                "deg": 122,
+                "gust": 5.85
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 0.64
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 15:00:00"
+            },
+            {
+              "dt": 1770832800,
+              "main": {
+                "temp": 27.56,
+                "feels_like": 29.73,
+                "temp_min": 27.56,
+                "temp_max": 27.56,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 69,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01d"
+                }
+              ],
+              "clouds": {
+                "all": 3
+              },
+              "wind": {
+                "speed": 6.56,
+                "deg": 121,
+                "gust": 6.81
+              },
+              "visibility": 10000,
+              "pop": 0.72,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 18:00:00"
+            },
+            {
+              "dt": 1770843600,
+              "main": {
+                "temp": 27.11,
+                "feels_like": 29.5,
+                "temp_min": 27.11,
+                "temp_max": 27.11,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01d"
+                }
+              ],
+              "clouds": {
+                "all": 5
+              },
+              "wind": {
+                "speed": 6.14,
+                "deg": 110,
+                "gust": 6.39
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 21:00:00"
+            },
+            {
+              "dt": 1770854400,
+              "main": {
+                "temp": 26.95,
+                "feels_like": 28.85,
+                "temp_min": 26.95,
+                "temp_max": 26.95,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 71,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 801,
+                  "main": "Clouds",
+                  "description": "algumas nuvens",
+                  "icon": "02n"
+                }
+              ],
+              "clouds": {
+                "all": 12
+              },
+              "wind": {
+                "speed": 6.79,
+                "deg": 108,
+                "gust": 7.4
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 00:00:00"
+            },
+            {
+              "dt": 1770865200,
+              "main": {
+                "temp": 26.63,
+                "feels_like": 26.63,
+                "temp_min": 26.63,
+                "temp_max": 26.63,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 69,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 60
+              },
+              "wind": {
+                "speed": 5.63,
+                "deg": 109,
+                "gust": 6.01
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 03:00:00"
+            },
+            {
+              "dt": 1770876000,
+              "main": {
+                "temp": 26.25,
+                "feels_like": 26.25,
+                "temp_min": 26.25,
+                "temp_max": 26.25,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 71,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 74
+              },
+              "wind": {
+                "speed": 3.11,
+                "deg": 119,
+                "gust": 3.61
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 06:00:00"
+            },
+            {
+              "dt": 1770886800,
+              "main": {
+                "temp": 26.01,
+                "feels_like": 26.01,
+                "temp_min": 26.01,
+                "temp_max": 26.01,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 77,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 52
+              },
+              "wind": {
+                "speed": 3.7,
+                "deg": 152,
+                "gust": 4.07
+              },
+              "visibility": 10000,
+              "pop": 0.35,
+              "rain": {
+                "3h": 0.19
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 09:00:00"
+            },
+            {
+              "dt": 1770897600,
+              "main": {
+                "temp": 26.58,
+                "feels_like": 26.58,
+                "temp_min": 26.58,
+                "temp_max": 26.58,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1016,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 37
+              },
+              "wind": {
+                "speed": 4.34,
+                "deg": 128,
+                "gust": 5.06
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.98
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 12:00:00"
+            },
+            {
+              "dt": 1770908400,
+              "main": {
+                "temp": 27.52,
+                "feels_like": 29.55,
+                "temp_min": 27.52,
+                "temp_max": 27.52,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 68,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 63
+              },
+              "wind": {
+                "speed": 5.29,
+                "deg": 126,
+                "gust": 5.76
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 1.48
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 15:00:00"
+            },
+            {
+              "dt": 1770919200,
+              "main": {
+                "temp": 27.22,
+                "feels_like": 29.42,
+                "temp_min": 27.22,
+                "temp_max": 27.22,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 72,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 56
+              },
+              "wind": {
+                "speed": 5.96,
+                "deg": 127,
+                "gust": 6.32
+              },
+              "visibility": 10000,
+              "pop": 0.8,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 18:00:00"
+            },
+            {
+              "dt": 1770930000,
+              "main": {
+                "temp": 27.13,
+                "feels_like": 29.63,
+                "temp_min": 27.13,
+                "temp_max": 27.13,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 76,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 73
+              },
+              "wind": {
+                "speed": 6.28,
+                "deg": 107,
+                "gust": 7.07
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 0.81
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 21:00:00"
+            },
+            {
+              "dt": 1770940800,
+              "main": {
+                "temp": 26.79,
+                "feels_like": 28.73,
+                "temp_min": 26.79,
+                "temp_max": 26.79,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1015,
+                "humidity": 73,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03n"
+                }
+              ],
+              "clouds": {
+                "all": 42
+              },
+              "wind": {
+                "speed": 5.45,
+                "deg": 110,
+                "gust": 6.17
+              },
+              "visibility": 10000,
+              "pop": 0.83,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 00:00:00"
+            },
+            {
+              "dt": 1770951600,
+              "main": {
+                "temp": 26.19,
+                "feels_like": 26.19,
+                "temp_min": 26.19,
+                "temp_max": 26.19,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 79,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10n"
+                }
+              ],
+              "clouds": {
+                "all": 65
+              },
+              "wind": {
+                "speed": 5.63,
+                "deg": 113,
+                "gust": 6.8
+              },
+              "visibility": 10000,
+              "pop": 0.89,
+              "rain": {
+                "3h": 0.75
+              },
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 03:00:00"
+            },
+            {
+              "dt": 1770962400,
+              "main": {
+                "temp": 26.28,
+                "feels_like": 26.28,
+                "temp_min": 26.28,
+                "temp_max": 26.28,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 78,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10n"
+                }
+              ],
+              "clouds": {
+                "all": 58
+              },
+              "wind": {
+                "speed": 5.86,
+                "deg": 107,
+                "gust": 6.71
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.55
+              },
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 06:00:00"
+            },
+            {
+              "dt": 1770973200,
+              "main": {
+                "temp": 26.45,
+                "feels_like": 26.45,
+                "temp_min": 26.45,
+                "temp_max": 26.45,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 4.43,
+                "deg": 101,
+                "gust": 4.94
+              },
+              "visibility": 10000,
+              "pop": 0.96,
+              "rain": {
+                "3h": 1.24
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 09:00:00"
+            },
+            {
+              "dt": 1770984000,
+              "main": {
+                "temp": 27.17,
+                "feels_like": 29.06,
+                "temp_min": 27.17,
+                "temp_max": 27.17,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1016,
+                "humidity": 69,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 3.13,
+                "deg": 115,
+                "gust": 3.4
+              },
+              "visibility": 10000,
+              "pop": 0.8,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 12:00:00"
+            },
+            {
+              "dt": 1770994800,
+              "main": {
+                "temp": 27.49,
+                "feels_like": 29.61,
+                "temp_min": 27.49,
+                "temp_max": 27.49,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 69,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 4.39,
+                "deg": 149,
+                "gust": 4.28
+              },
+              "visibility": 10000,
+              "pop": 0.06,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 15:00:00"
+            },
+            {
+              "dt": 1771005600,
+              "main": {
+                "temp": 27.32,
+                "feels_like": 29.81,
+                "temp_min": 27.32,
+                "temp_max": 27.32,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1013,
+                "humidity": 74,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 5.63,
+                "deg": 126,
+                "gust": 6.04
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 18:00:00"
+            },
+            {
+              "dt": 1771016400,
+              "main": {
+                "temp": 27.23,
+                "feels_like": 29.64,
+                "temp_min": 27.23,
+                "temp_max": 27.23,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1014,
+                "humidity": 74,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 42
+              },
+              "wind": {
+                "speed": 5.96,
+                "deg": 116,
+                "gust": 6.32
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 21:00:00"
+            },
+            {
+              "dt": 1771027200,
+              "main": {
+                "temp": 26.9,
+                "feels_like": 29.09,
+                "temp_min": 26.9,
+                "temp_max": 26.9,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1015,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 72
+              },
+              "wind": {
+                "speed": 5.6,
+                "deg": 97,
+                "gust": 6.39
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 00:00:00"
+            },
+            {
+              "dt": 1771038000,
+              "main": {
+                "temp": 26.7,
+                "feels_like": 28.79,
+                "temp_min": 26.7,
+                "temp_max": 26.7,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 76,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 67
+              },
+              "wind": {
+                "speed": 4.85,
+                "deg": 94,
+                "gust": 5.44
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 03:00:00"
+            },
+            {
+              "dt": 1771048800,
+              "main": {
+                "temp": 26.3,
+                "feels_like": 26.3,
+                "temp_min": 26.3,
+                "temp_max": 26.3,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1013,
+                "humidity": 77,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 84
+              },
+              "wind": {
+                "speed": 3,
+                "deg": 100,
+                "gust": 3.44
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 06:00:00"
+            },
+            {
+              "dt": 1771059600,
+              "main": {
+                "temp": 25.98,
+                "feels_like": 25.98,
+                "temp_min": 25.98,
+                "temp_max": 25.98,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1014,
+                "humidity": 79,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 81
+              },
+              "wind": {
+                "speed": 3.09,
+                "deg": 94,
+                "gust": 3.56
+              },
+              "visibility": 7377,
+              "pop": 1,
+              "rain": {
+                "3h": 1.05
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 09:00:00"
+            },
+            {
+              "dt": 1771070400,
+              "main": {
+                "temp": 26.15,
+                "feels_like": 26.15,
+                "temp_min": 26.15,
+                "temp_max": 26.15,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1015,
+                "humidity": 77,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 501,
+                  "main": "Rain",
+                  "description": "chuva moderada",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 72
+              },
+              "wind": {
+                "speed": 3.07,
+                "deg": 129,
+                "gust": 3.37
+              },
+              "visibility": 8165,
+              "pop": 1,
+              "rain": {
+                "3h": 3.93
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 12:00:00"
+            }
+          ],
+          "city": {
+            "id": 6321026,
+            "name": "Salvador",
+            "coord": {
+              "lat": -12.9714,
+              "lon": -38.5014
+            },
+            "country": "BR",
+            "population": 2676606,
+            "timezone": -10800,
+            "sunrise": 1770625855,
+            "sunset": 1770671137
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Tempo até Trabalho": [
+      {
+        "json": {
+          "type": "FeatureCollection",
+          "bbox": [
+            -38.430703,
+            -12.951008,
+            -38.255825,
+            -12.82387
+          ],
+          "features": [
+            {
+              "bbox": [
+                -38.430703,
+                -12.951008,
+                -38.255825,
+                -12.82387
+              ],
+              "type": "Feature",
+              "properties": {
+                "segments": [
+                  {
+                    "distance": 29405.2,
+                    "duration": 1982.9,
+                    "steps": [
+                      {
+                        "distance": 12.8,
+                        "duration": 3.1,
+                        "type": 11,
+                        "instruction": "Head southeast",
+                        "name": "-",
+                        "way_points": [
+                          0,
+                          1
+                        ]
+                      },
+                      {
+                        "distance": 151,
+                        "duration": 27.4,
+                        "type": 0,
+                        "instruction": "Turn left",
+                        "name": "-",
+                        "way_points": [
+                          1,
+                          6
+                        ]
+                      },
+                      {
+                        "distance": 12.7,
+                        "duration": 2.3,
+                        "type": 1,
+                        "instruction": "Turn right",
+                        "name": "-",
+                        "way_points": [
+                          6,
+                          7
+                        ]
+                      },
+                      {
+                        "distance": 131.2,
+                        "duration": 31.5,
+                        "type": 0,
+                        "instruction": "Turn left",
+                        "name": "-",
+                        "way_points": [
+                          7,
+                          16
+                        ]
+                      },
+                      {
+                        "distance": 13427.9,
+                        "duration": 907,
+                        "type": 12,
+                        "instruction": "Keep left",
+                        "name": "-",
+                        "way_points": [
+                          16,
+                          187
+                        ]
+                      },
+                      {
+                        "distance": 12697.3,
+                        "duration": 849.6,
+                        "type": 13,
+                        "instruction": "Keep right onto Rua Alagoas",
+                        "name": "Rua Alagoas",
+                        "way_points": [
+                          187,
+                          353
+                        ]
+                      },
+                      {
+                        "distance": 2972.4,
+                        "duration": 162.1,
+                        "type": 0,
+                        "instruction": "Turn left",
+                        "name": "-",
+                        "way_points": [
+                          353,
+                          387
+                        ]
+                      },
+                      {
+                        "distance": 0,
+                        "duration": 0,
+                        "type": 10,
+                        "instruction": "Arrive at your destination, on the right",
+                        "name": "-",
+                        "way_points": [
+                          387,
+                          387
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "way_points": [
+                  0,
+                  387
+                ],
+                "summary": {
+                  "distance": 29405.2,
+                  "duration": 1982.9
+                }
+              },
+              "geometry": {
+                "coordinates": [
+                  [
+                    -38.430703,
+                    -12.945785
+                  ],
+                  [
+                    -38.430636,
+                    -12.945879
+                  ],
+                  [
+                    -38.430227,
+                    -12.945868
+                  ],
+                  [
+                    -38.430135,
+                    -12.945892
+                  ],
+                  [
+                    -38.430058,
+                    -12.94594
+                  ],
+                  [
+                    -38.429691,
+                    -12.946584
+                  ],
+                  [
+                    -38.429672,
+                    -12.946619
+                  ],
+                  [
+                    -38.429776,
+                    -12.946673
+                  ],
+                  [
+                    -38.429696,
+                    -12.946829
+                  ],
+                  [
+                    -38.429624,
+                    -12.946967
+                  ],
+                  [
+                    -38.42956,
+                    -12.94709
+                  ],
+                  [
+                    -38.429493,
+                    -12.947214
+                  ],
+                  [
+                    -38.429411,
+                    -12.947366
+                  ],
+                  [
+                    -38.429386,
+                    -12.947457
+                  ],
+                  [
+                    -38.42939,
+                    -12.947507
+                  ],
+                  [
+                    -38.429422,
+                    -12.947609
+                  ],
+                  [
+                    -38.429496,
+                    -12.947741
+                  ],
+                  [
+                    -38.429458,
+                    -12.947928
+                  ],
+                  [
+                    -38.429338,
+                    -12.948276
+                  ],
+                  [
+                    -38.429295,
+                    -12.94845
+                  ],
+                  [
+                    -38.429275,
+                    -12.94847
+                  ],
+                  [
+                    -38.428946,
+                    -12.9485
+                  ],
+                  [
+                    -38.428541,
+                    -12.948451
+                  ],
+                  [
+                    -38.428414,
+                    -12.948442
+                  ],
+                  [
+                    -38.428176,
+                    -12.948436
+                  ],
+                  [
+                    -38.427794,
+                    -12.948456
+                  ],
+                  [
+                    -38.427414,
+                    -12.948497
+                  ],
+                  [
+                    -38.427063,
+                    -12.948558
+                  ],
+                  [
+                    -38.426699,
+                    -12.948655
+                  ],
+                  [
+                    -38.426335,
+                    -12.948787
+                  ],
+                  [
+                    -38.426027,
+                    -12.948927
+                  ],
+                  [
+                    -38.425773,
+                    -12.949069
+                  ],
+                  [
+                    -38.425372,
+                    -12.949322
+                  ],
+                  [
+                    -38.425272,
+                    -12.949388
+                  ],
+                  [
+                    -38.424151,
+                    -12.950194
+                  ],
+                  [
+                    -38.423955,
+                    -12.950349
+                  ],
+                  [
+                    -38.423903,
+                    -12.950425
+                  ],
+                  [
+                    -38.42387,
+                    -12.950531
+                  ],
+                  [
+                    -38.423858,
+                    -12.950639
+                  ],
+                  [
+                    -38.423873,
+                    -12.950732
+                  ],
+                  [
+                    -38.423949,
+                    -12.950887
+                  ],
+                  [
+                    -38.424029,
+                    -12.950952
+                  ],
+                  [
+                    -38.424114,
+                    -12.950992
+                  ],
+                  [
+                    -38.424223,
+                    -12.951008
+                  ],
+                  [
+                    -38.424315,
+                    -12.950993
+                  ],
+                  [
+                    -38.42441,
+                    -12.950956
+                  ],
+                  [
+                    -38.424479,
+                    -12.950882
+                  ],
+                  [
+                    -38.424523,
+                    -12.950798
+                  ],
+                  [
+                    -38.424564,
+                    -12.950662
+                  ],
+                  [
+                    -38.424604,
+                    -12.950397
+                  ],
+                  [
+                    -38.423857,
+                    -12.949394
+                  ],
+                  [
+                    -38.423258,
+                    -12.948605
+                  ],
+                  [
+                    -38.422691,
+                    -12.947781
+                  ],
+                  [
+                    -38.422072,
+                    -12.946949
+                  ],
+                  [
+                    -38.420851,
+                    -12.945248
+                  ],
+                  [
+                    -38.420039,
+                    -12.944132
+                  ],
+                  [
+                    -38.419497,
+                    -12.943412
+                  ],
+                  [
+                    -38.418281,
+                    -12.94176
+                  ],
+                  [
+                    -38.418092,
+                    -12.941552
+                  ],
+                  [
+                    -38.41782,
+                    -12.941293
+                  ],
+                  [
+                    -38.417077,
+                    -12.940699
+                  ],
+                  [
+                    -38.416189,
+                    -12.940156
+                  ],
+                  [
+                    -38.415735,
+                    -12.939965
+                  ],
+                  [
+                    -38.415296,
+                    -12.939832
+                  ],
+                  [
+                    -38.414871,
+                    -12.939727
+                  ],
+                  [
+                    -38.41445,
+                    -12.939661
+                  ],
+                  [
+                    -38.413994,
+                    -12.939614
+                  ],
+                  [
+                    -38.413094,
+                    -12.939473
+                  ],
+                  [
+                    -38.411254,
+                    -12.939197
+                  ],
+                  [
+                    -38.406992,
+                    -12.938538
+                  ],
+                  [
+                    -38.403458,
+                    -12.938001
+                  ],
+                  [
+                    -38.403147,
+                    -12.937954
+                  ],
+                  [
+                    -38.401263,
+                    -12.937689
+                  ],
+                  [
+                    -38.399596,
+                    -12.937401
+                  ],
+                  [
+                    -38.398754,
+                    -12.937222
+                  ],
+                  [
+                    -38.398163,
+                    -12.937047
+                  ],
+                  [
+                    -38.397457,
+                    -12.936807
+                  ],
+                  [
+                    -38.397012,
+                    -12.936614
+                  ],
+                  [
+                    -38.396199,
+                    -12.936193
+                  ],
+                  [
+                    -38.395712,
+                    -12.935905
+                  ],
+                  [
+                    -38.395229,
+                    -12.935582
+                  ],
+                  [
+                    -38.39432,
+                    -12.93487
+                  ],
+                  [
+                    -38.393591,
+                    -12.934259
+                  ],
+                  [
+                    -38.391439,
+                    -12.932533
+                  ],
+                  [
+                    -38.389723,
+                    -12.931141
+                  ],
+                  [
+                    -38.387005,
+                    -12.928948
+                  ],
+                  [
+                    -38.386228,
+                    -12.928305
+                  ],
+                  [
+                    -38.385726,
+                    -12.927916
+                  ],
+                  [
+                    -38.385371,
+                    -12.927672
+                  ],
+                  [
+                    -38.385089,
+                    -12.927504
+                  ],
+                  [
+                    -38.384043,
+                    -12.926948
+                  ],
+                  [
+                    -38.383624,
+                    -12.926762
+                  ],
+                  [
+                    -38.383117,
+                    -12.926568
+                  ],
+                  [
+                    -38.382682,
+                    -12.926423
+                  ],
+                  [
+                    -38.382343,
+                    -12.926326
+                  ],
+                  [
+                    -38.381826,
+                    -12.926205
+                  ],
+                  [
+                    -38.381055,
+                    -12.926059
+                  ],
+                  [
+                    -38.380383,
+                    -12.925935
+                  ],
+                  [
+                    -38.380116,
+                    -12.925882
+                  ],
+                  [
+                    -38.378261,
+                    -12.925529
+                  ],
+                  [
+                    -38.376197,
+                    -12.925147
+                  ],
+                  [
+                    -38.375202,
+                    -12.924957
+                  ],
+                  [
+                    -38.371826,
+                    -12.924336
+                  ],
+                  [
+                    -38.371321,
+                    -12.924233
+                  ],
+                  [
+                    -38.369644,
+                    -12.923889
+                  ],
+                  [
+                    -38.367922,
+                    -12.923585
+                  ],
+                  [
+                    -38.366714,
+                    -12.923374
+                  ],
+                  [
+                    -38.362359,
+                    -12.92255
+                  ],
+                  [
+                    -38.358391,
+                    -12.921822
+                  ],
+                  [
+                    -38.357715,
+                    -12.921682
+                  ],
+                  [
+                    -38.357348,
+                    -12.921598
+                  ],
+                  [
+                    -38.357157,
+                    -12.921558
+                  ],
+                  [
+                    -38.356716,
+                    -12.921434
+                  ],
+                  [
+                    -38.355099,
+                    -12.920817
+                  ],
+                  [
+                    -38.354793,
+                    -12.920762
+                  ],
+                  [
+                    -38.354635,
+                    -12.920755
+                  ],
+                  [
+                    -38.354482,
+                    -12.920766
+                  ],
+                  [
+                    -38.354179,
+                    -12.920829
+                  ],
+                  [
+                    -38.353711,
+                    -12.920995
+                  ],
+                  [
+                    -38.353314,
+                    -12.921173
+                  ],
+                  [
+                    -38.353005,
+                    -12.921314
+                  ],
+                  [
+                    -38.352463,
+                    -12.921525
+                  ],
+                  [
+                    -38.352172,
+                    -12.921596
+                  ],
+                  [
+                    -38.351818,
+                    -12.921624
+                  ],
+                  [
+                    -38.351638,
+                    -12.92162
+                  ],
+                  [
+                    -38.351282,
+                    -12.921567
+                  ],
+                  [
+                    -38.350908,
+                    -12.921467
+                  ],
+                  [
+                    -38.34913,
+                    -12.920967
+                  ],
+                  [
+                    -38.347399,
+                    -12.920492
+                  ],
+                  [
+                    -38.347104,
+                    -12.920383
+                  ],
+                  [
+                    -38.346952,
+                    -12.920311
+                  ],
+                  [
+                    -38.346769,
+                    -12.920209
+                  ],
+                  [
+                    -38.346482,
+                    -12.920016
+                  ],
+                  [
+                    -38.346229,
+                    -12.919811
+                  ],
+                  [
+                    -38.345894,
+                    -12.919509
+                  ],
+                  [
+                    -38.34572,
+                    -12.919268
+                  ],
+                  [
+                    -38.345476,
+                    -12.918826
+                  ],
+                  [
+                    -38.345341,
+                    -12.918443
+                  ],
+                  [
+                    -38.345286,
+                    -12.918241
+                  ],
+                  [
+                    -38.345228,
+                    -12.917885
+                  ],
+                  [
+                    -38.345206,
+                    -12.917522
+                  ],
+                  [
+                    -38.345244,
+                    -12.916966
+                  ],
+                  [
+                    -38.34529,
+                    -12.91678
+                  ],
+                  [
+                    -38.345764,
+                    -12.915364
+                  ],
+                  [
+                    -38.346479,
+                    -12.913205
+                  ],
+                  [
+                    -38.346813,
+                    -12.912244
+                  ],
+                  [
+                    -38.347156,
+                    -12.911356
+                  ],
+                  [
+                    -38.347276,
+                    -12.910841
+                  ],
+                  [
+                    -38.347317,
+                    -12.910288
+                  ],
+                  [
+                    -38.34727,
+                    -12.909694
+                  ],
+                  [
+                    -38.347205,
+                    -12.909121
+                  ],
+                  [
+                    -38.347142,
+                    -12.908689
+                  ],
+                  [
+                    -38.347096,
+                    -12.908483
+                  ],
+                  [
+                    -38.346949,
+                    -12.908039
+                  ],
+                  [
+                    -38.346826,
+                    -12.907775
+                  ],
+                  [
+                    -38.346671,
+                    -12.907501
+                  ],
+                  [
+                    -38.346524,
+                    -12.907281
+                  ],
+                  [
+                    -38.346341,
+                    -12.907061
+                  ],
+                  [
+                    -38.346183,
+                    -12.906883
+                  ],
+                  [
+                    -38.346005,
+                    -12.906715
+                  ],
+                  [
+                    -38.345612,
+                    -12.906341
+                  ],
+                  [
+                    -38.345324,
+                    -12.906103
+                  ],
+                  [
+                    -38.344964,
+                    -12.905867
+                  ],
+                  [
+                    -38.344714,
+                    -12.905746
+                  ],
+                  [
+                    -38.343863,
+                    -12.905461
+                  ],
+                  [
+                    -38.343691,
+                    -12.905362
+                  ],
+                  [
+                    -38.343524,
+                    -12.905223
+                  ],
+                  [
+                    -38.343294,
+                    -12.904955
+                  ],
+                  [
+                    -38.343164,
+                    -12.904796
+                  ],
+                  [
+                    -38.343021,
+                    -12.90453
+                  ],
+                  [
+                    -38.342889,
+                    -12.904268
+                  ],
+                  [
+                    -38.34279,
+                    -12.904106
+                  ],
+                  [
+                    -38.342505,
+                    -12.903851
+                  ],
+                  [
+                    -38.342208,
+                    -12.903667
+                  ],
+                  [
+                    -38.341947,
+                    -12.903532
+                  ],
+                  [
+                    -38.341795,
+                    -12.903488
+                  ],
+                  [
+                    -38.341471,
+                    -12.903434
+                  ],
+                  [
+                    -38.341334,
+                    -12.903424
+                  ],
+                  [
+                    -38.341067,
+                    -12.903415
+                  ],
+                  [
+                    -38.339444,
+                    -12.903327
+                  ],
+                  [
+                    -38.33888,
+                    -12.903297
+                  ],
+                  [
+                    -38.338813,
+                    -12.903293
+                  ],
+                  [
+                    -38.338722,
+                    -12.903288
+                  ],
+                  [
+                    -38.337737,
+                    -12.903221
+                  ],
+                  [
+                    -38.335982,
+                    -12.903097
+                  ],
+                  [
+                    -38.335548,
+                    -12.903023
+                  ],
+                  [
+                    -38.334968,
+                    -12.902863
+                  ],
+                  [
+                    -38.334815,
+                    -12.902808
+                  ],
+                  [
+                    -38.334416,
+                    -12.902713
+                  ],
+                  [
+                    -38.334161,
+                    -12.902702
+                  ],
+                  [
+                    -38.333075,
+                    -12.902781
+                  ],
+                  [
+                    -38.332818,
+                    -12.902733
+                  ],
+                  [
+                    -38.332627,
+                    -12.90264
+                  ],
+                  [
+                    -38.332442,
+                    -12.902514
+                  ],
+                  [
+                    -38.332278,
+                    -12.902362
+                  ],
+                  [
+                    -38.330922,
+                    -12.900798
+                  ],
+                  [
+                    -38.330366,
+                    -12.900179
+                  ],
+                  [
+                    -38.329905,
+                    -12.899718
+                  ],
+                  [
+                    -38.329323,
+                    -12.899182
+                  ],
+                  [
+                    -38.328298,
+                    -12.89833
+                  ],
+                  [
+                    -38.328042,
+                    -12.89812
+                  ],
+                  [
+                    -38.327266,
+                    -12.897485
+                  ],
+                  [
+                    -38.327182,
+                    -12.897402
+                  ],
+                  [
+                    -38.327054,
+                    -12.897219
+                  ],
+                  [
+                    -38.326936,
+                    -12.896951
+                  ],
+                  [
+                    -38.326301,
+                    -12.895546
+                  ],
+                  [
+                    -38.325723,
+                    -12.894336
+                  ],
+                  [
+                    -38.325196,
+                    -12.893346
+                  ],
+                  [
+                    -38.324764,
+                    -12.892382
+                  ],
+                  [
+                    -38.324688,
+                    -12.892272
+                  ],
+                  [
+                    -38.324626,
+                    -12.89222
+                  ],
+                  [
+                    -38.324234,
+                    -12.891867
+                  ],
+                  [
+                    -38.322732,
+                    -12.890678
+                  ],
+                  [
+                    -38.321474,
+                    -12.889592
+                  ],
+                  [
+                    -38.320882,
+                    -12.889087
+                  ],
+                  [
+                    -38.320671,
+                    -12.888846
+                  ],
+                  [
+                    -38.320577,
+                    -12.888666
+                  ],
+                  [
+                    -38.320538,
+                    -12.888509
+                  ],
+                  [
+                    -38.320542,
+                    -12.88789
+                  ],
+                  [
+                    -38.320524,
+                    -12.887665
+                  ],
+                  [
+                    -38.320364,
+                    -12.887314
+                  ],
+                  [
+                    -38.320241,
+                    -12.887207
+                  ],
+                  [
+                    -38.319851,
+                    -12.886847
+                  ],
+                  [
+                    -38.319604,
+                    -12.886649
+                  ],
+                  [
+                    -38.318907,
+                    -12.886046
+                  ],
+                  [
+                    -38.318666,
+                    -12.885824
+                  ],
+                  [
+                    -38.318558,
+                    -12.88573
+                  ],
+                  [
+                    -38.318281,
+                    -12.88551
+                  ],
+                  [
+                    -38.317718,
+                    -12.885106
+                  ],
+                  [
+                    -38.317369,
+                    -12.884855
+                  ],
+                  [
+                    -38.317101,
+                    -12.884621
+                  ],
+                  [
+                    -38.316962,
+                    -12.884437
+                  ],
+                  [
+                    -38.316935,
+                    -12.884398
+                  ],
+                  [
+                    -38.316846,
+                    -12.884258
+                  ],
+                  [
+                    -38.316641,
+                    -12.883943
+                  ],
+                  [
+                    -38.316509,
+                    -12.883774
+                  ],
+                  [
+                    -38.316349,
+                    -12.883628
+                  ],
+                  [
+                    -38.315761,
+                    -12.883095
+                  ],
+                  [
+                    -38.315098,
+                    -12.882494
+                  ],
+                  [
+                    -38.314825,
+                    -12.882245
+                  ],
+                  [
+                    -38.314731,
+                    -12.882165
+                  ],
+                  [
+                    -38.314404,
+                    -12.881872
+                  ],
+                  [
+                    -38.314281,
+                    -12.881762
+                  ],
+                  [
+                    -38.313317,
+                    -12.880903
+                  ],
+                  [
+                    -38.312836,
+                    -12.880474
+                  ],
+                  [
+                    -38.311871,
+                    -12.879607
+                  ],
+                  [
+                    -38.31161,
+                    -12.879368
+                  ],
+                  [
+                    -38.310923,
+                    -12.878747
+                  ],
+                  [
+                    -38.310579,
+                    -12.878385
+                  ],
+                  [
+                    -38.309961,
+                    -12.877764
+                  ],
+                  [
+                    -38.30978,
+                    -12.877594
+                  ],
+                  [
+                    -38.309556,
+                    -12.8774
+                  ],
+                  [
+                    -38.308829,
+                    -12.876748
+                  ],
+                  [
+                    -38.308569,
+                    -12.876523
+                  ],
+                  [
+                    -38.308189,
+                    -12.876186
+                  ],
+                  [
+                    -38.307712,
+                    -12.875771
+                  ],
+                  [
+                    -38.306714,
+                    -12.874986
+                  ],
+                  [
+                    -38.306616,
+                    -12.874897
+                  ],
+                  [
+                    -38.30634,
+                    -12.874648
+                  ],
+                  [
+                    -38.305354,
+                    -12.873765
+                  ],
+                  [
+                    -38.304927,
+                    -12.87338
+                  ],
+                  [
+                    -38.304426,
+                    -12.872929
+                  ],
+                  [
+                    -38.303501,
+                    -12.872107
+                  ],
+                  [
+                    -38.30179,
+                    -12.870581
+                  ],
+                  [
+                    -38.301724,
+                    -12.870525
+                  ],
+                  [
+                    -38.301554,
+                    -12.870388
+                  ],
+                  [
+                    -38.301263,
+                    -12.870153
+                  ],
+                  [
+                    -38.300773,
+                    -12.869824
+                  ],
+                  [
+                    -38.300332,
+                    -12.86958
+                  ],
+                  [
+                    -38.299779,
+                    -12.86933
+                  ],
+                  [
+                    -38.299247,
+                    -12.869102
+                  ],
+                  [
+                    -38.298757,
+                    -12.86885
+                  ],
+                  [
+                    -38.29836,
+                    -12.868588
+                  ],
+                  [
+                    -38.298159,
+                    -12.868438
+                  ],
+                  [
+                    -38.297687,
+                    -12.868045
+                  ],
+                  [
+                    -38.297439,
+                    -12.867899
+                  ],
+                  [
+                    -38.296967,
+                    -12.867657
+                  ],
+                  [
+                    -38.296746,
+                    -12.867543
+                  ],
+                  [
+                    -38.295085,
+                    -12.866661
+                  ],
+                  [
+                    -38.294688,
+                    -12.866402
+                  ],
+                  [
+                    -38.29424,
+                    -12.866043
+                  ],
+                  [
+                    -38.294032,
+                    -12.865842
+                  ],
+                  [
+                    -38.29365,
+                    -12.865427
+                  ],
+                  [
+                    -38.293026,
+                    -12.864591
+                  ],
+                  [
+                    -38.292613,
+                    -12.863998
+                  ],
+                  [
+                    -38.292106,
+                    -12.86331
+                  ],
+                  [
+                    -38.292066,
+                    -12.863257
+                  ],
+                  [
+                    -38.29181,
+                    -12.863017
+                  ],
+                  [
+                    -38.291612,
+                    -12.862887
+                  ],
+                  [
+                    -38.29143,
+                    -12.86277
+                  ],
+                  [
+                    -38.291216,
+                    -12.86265
+                  ],
+                  [
+                    -38.290638,
+                    -12.86238
+                  ],
+                  [
+                    -38.28993,
+                    -12.862046
+                  ],
+                  [
+                    -38.288414,
+                    -12.861338
+                  ],
+                  [
+                    -38.287791,
+                    -12.86104
+                  ],
+                  [
+                    -38.287543,
+                    -12.860905
+                  ],
+                  [
+                    -38.287218,
+                    -12.8607
+                  ],
+                  [
+                    -38.286865,
+                    -12.86041
+                  ],
+                  [
+                    -38.286753,
+                    -12.860275
+                  ],
+                  [
+                    -38.286656,
+                    -12.86016
+                  ],
+                  [
+                    -38.286539,
+                    -12.860003
+                  ],
+                  [
+                    -38.286336,
+                    -12.859664
+                  ],
+                  [
+                    -38.286117,
+                    -12.859196
+                  ],
+                  [
+                    -38.285815,
+                    -12.858488
+                  ],
+                  [
+                    -38.285154,
+                    -12.856988
+                  ],
+                  [
+                    -38.284692,
+                    -12.855864
+                  ],
+                  [
+                    -38.284553,
+                    -12.855551
+                  ],
+                  [
+                    -38.283719,
+                    -12.85359
+                  ],
+                  [
+                    -38.28342,
+                    -12.85296
+                  ],
+                  [
+                    -38.283257,
+                    -12.852656
+                  ],
+                  [
+                    -38.282708,
+                    -12.851736
+                  ],
+                  [
+                    -38.28125,
+                    -12.849365
+                  ],
+                  [
+                    -38.281143,
+                    -12.849189
+                  ],
+                  [
+                    -38.280994,
+                    -12.848945
+                  ],
+                  [
+                    -38.280791,
+                    -12.848624
+                  ],
+                  [
+                    -38.280756,
+                    -12.848569
+                  ],
+                  [
+                    -38.280283,
+                    -12.847824
+                  ],
+                  [
+                    -38.278564,
+                    -12.845048
+                  ],
+                  [
+                    -38.27806,
+                    -12.844204
+                  ],
+                  [
+                    -38.277794,
+                    -12.843759
+                  ],
+                  [
+                    -38.277376,
+                    -12.843086
+                  ],
+                  [
+                    -38.276705,
+                    -12.842001
+                  ],
+                  [
+                    -38.274904,
+                    -12.839133
+                  ],
+                  [
+                    -38.274379,
+                    -12.838298
+                  ],
+                  [
+                    -38.272478,
+                    -12.835242
+                  ],
+                  [
+                    -38.27191,
+                    -12.834361
+                  ],
+                  [
+                    -38.270695,
+                    -12.832405
+                  ],
+                  [
+                    -38.27031,
+                    -12.831805
+                  ],
+                  [
+                    -38.269531,
+                    -12.830566
+                  ],
+                  [
+                    -38.269206,
+                    -12.830077
+                  ],
+                  [
+                    -38.268986,
+                    -12.829803
+                  ],
+                  [
+                    -38.268545,
+                    -12.829351
+                  ],
+                  [
+                    -38.268344,
+                    -12.829173
+                  ],
+                  [
+                    -38.268081,
+                    -12.828958
+                  ],
+                  [
+                    -38.267223,
+                    -12.828385
+                  ],
+                  [
+                    -38.266796,
+                    -12.828151
+                  ],
+                  [
+                    -38.266585,
+                    -12.828053
+                  ],
+                  [
+                    -38.266222,
+                    -12.827894
+                  ],
+                  [
+                    -38.265401,
+                    -12.8276
+                  ],
+                  [
+                    -38.263519,
+                    -12.826958
+                  ],
+                  [
+                    -38.26334,
+                    -12.826895
+                  ],
+                  [
+                    -38.263239,
+                    -12.826859
+                  ],
+                  [
+                    -38.263195,
+                    -12.826844
+                  ],
+                  [
+                    -38.263098,
+                    -12.82681
+                  ],
+                  [
+                    -38.262402,
+                    -12.826563
+                  ],
+                  [
+                    -38.261684,
+                    -12.826306
+                  ],
+                  [
+                    -38.261466,
+                    -12.826228
+                  ],
+                  [
+                    -38.260615,
+                    -12.825949
+                  ],
+                  [
+                    -38.2605,
+                    -12.82591
+                  ],
+                  [
+                    -38.25743,
+                    -12.824853
+                  ],
+                  [
+                    -38.257255,
+                    -12.824789
+                  ],
+                  [
+                    -38.256939,
+                    -12.824674
+                  ],
+                  [
+                    -38.256699,
+                    -12.824586
+                  ],
+                  [
+                    -38.255887,
+                    -12.8243
+                  ],
+                  [
+                    -38.255825,
+                    -12.824107
+                  ],
+                  [
+                    -38.255841,
+                    -12.824005
+                  ],
+                  [
+                    -38.255885,
+                    -12.823939
+                  ],
+                  [
+                    -38.255968,
+                    -12.82389
+                  ],
+                  [
+                    -38.256136,
+                    -12.82387
+                  ],
+                  [
+                    -38.256428,
+                    -12.823996
+                  ],
+                  [
+                    -38.256927,
+                    -12.824271
+                  ],
+                  [
+                    -38.257641,
+                    -12.824747
+                  ],
+                  [
+                    -38.258095,
+                    -12.824953
+                  ],
+                  [
+                    -38.259117,
+                    -12.825292
+                  ],
+                  [
+                    -38.259856,
+                    -12.825544
+                  ],
+                  [
+                    -38.260826,
+                    -12.825858
+                  ],
+                  [
+                    -38.261208,
+                    -12.825962
+                  ],
+                  [
+                    -38.262623,
+                    -12.826182
+                  ],
+                  [
+                    -38.262949,
+                    -12.826268
+                  ],
+                  [
+                    -38.263265,
+                    -12.826372
+                  ],
+                  [
+                    -38.263565,
+                    -12.826488
+                  ],
+                  [
+                    -38.264044,
+                    -12.826744
+                  ],
+                  [
+                    -38.264599,
+                    -12.827091
+                  ],
+                  [
+                    -38.264713,
+                    -12.827157
+                  ],
+                  [
+                    -38.264878,
+                    -12.827253
+                  ],
+                  [
+                    -38.265223,
+                    -12.827401
+                  ],
+                  [
+                    -38.266135,
+                    -12.827731
+                  ],
+                  [
+                    -38.266873,
+                    -12.828057
+                  ],
+                  [
+                    -38.267728,
+                    -12.828551
+                  ],
+                  [
+                    -38.268039,
+                    -12.828764
+                  ],
+                  [
+                    -38.268585,
+                    -12.829222
+                  ],
+                  [
+                    -38.269143,
+                    -12.829809
+                  ],
+                  [
+                    -38.269565,
+                    -12.830392
+                  ],
+                  [
+                    -38.270991,
+                    -12.832689
+                  ],
+                  [
+                    -38.271936,
+                    -12.834183
+                  ],
+                  [
+                    -38.27327,
+                    -12.836314
+                  ],
+                  [
+                    -38.275441,
+                    -12.839779
+                  ],
+                  [
+                    -38.275533,
+                    -12.839922
+                  ]
+                ],
+                "type": "LineString"
+              }
+            }
+          ],
+          "metadata": {
+            "attribution": "openrouteservice.org | OpenStreetMap contributors",
+            "service": "routing",
+            "timestamp": 1770661444877,
+            "query": {
+              "coordinates": [
+                [
+                  -38.4304099,
+                  -12.9451544
+                ],
+                [
+                  -38.2755984,
+                  -12.8398822
+                ]
+              ],
+              "profile": "driving-car",
+              "profileName": "driving-car",
+              "format": "json"
+            },
+            "engine": {
+              "version": "9.5.0",
+              "build_date": "2025-10-31T12:33:09Z",
+              "graph_date": "2026-02-08T11:35:31Z",
+              "osm_date": "2026-02-02T00:59:59Z"
+            }
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Obter clima em Abrantes": [
+      {
+        "json": {
+          "cod": "200",
+          "message": 0,
+          "cnt": 40,
+          "list": [
+            {
+              "dt": 1770670800,
+              "main": {
+                "temp": 29.18,
+                "feels_like": 31.84,
+                "temp_min": 27.82,
+                "temp_max": 29.18,
+                "pressure": 1012,
+                "sea_level": 1012,
+                "grnd_level": 1008,
+                "humidity": 63,
+                "temp_kf": 1.36
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 72
+              },
+              "wind": {
+                "speed": 4.84,
+                "deg": 83,
+                "gust": 10.52
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-09 21:00:00"
+            },
+            {
+              "dt": 1770681600,
+              "main": {
+                "temp": 27.5,
+                "feels_like": 30.06,
+                "temp_min": 26.32,
+                "temp_max": 27.5,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1010,
+                "humidity": 73,
+                "temp_kf": 1.18
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03n"
+                }
+              ],
+              "clouds": {
+                "all": 50
+              },
+              "wind": {
+                "speed": 4.09,
+                "deg": 63,
+                "gust": 11.02
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 00:00:00"
+            },
+            {
+              "dt": 1770692400,
+              "main": {
+                "temp": 26.31,
+                "feels_like": 26.31,
+                "temp_min": 26.31,
+                "temp_max": 26.31,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1009,
+                "humidity": 85,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 8
+              },
+              "wind": {
+                "speed": 2.91,
+                "deg": 62,
+                "gust": 9.59
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 03:00:00"
+            },
+            {
+              "dt": 1770703200,
+              "main": {
+                "temp": 25.65,
+                "feels_like": 26.73,
+                "temp_min": 25.65,
+                "temp_max": 25.65,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1009,
+                "humidity": 94,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 10
+              },
+              "wind": {
+                "speed": 0.64,
+                "deg": 358,
+                "gust": 2.21
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-10 06:00:00"
+            },
+            {
+              "dt": 1770714000,
+              "main": {
+                "temp": 25.41,
+                "feels_like": 26.46,
+                "temp_min": 25.41,
+                "temp_max": 25.41,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 94,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 48
+              },
+              "wind": {
+                "speed": 0.92,
+                "deg": 331,
+                "gust": 1.49
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 09:00:00"
+            },
+            {
+              "dt": 1770724800,
+              "main": {
+                "temp": 29.86,
+                "feels_like": 31.83,
+                "temp_min": 29.86,
+                "temp_max": 29.86,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1011,
+                "humidity": 56,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 59
+              },
+              "wind": {
+                "speed": 2.89,
+                "deg": 88,
+                "gust": 3.71
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.19
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 12:00:00"
+            },
+            {
+              "dt": 1770735600,
+              "main": {
+                "temp": 32.68,
+                "feels_like": 33.92,
+                "temp_min": 32.68,
+                "temp_max": 32.68,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 43,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 81
+              },
+              "wind": {
+                "speed": 4.26,
+                "deg": 116,
+                "gust": 3.95
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.1
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 15:00:00"
+            },
+            {
+              "dt": 1770746400,
+              "main": {
+                "temp": 31.81,
+                "feels_like": 33.14,
+                "temp_min": 31.81,
+                "temp_max": 31.81,
+                "pressure": 1012,
+                "sea_level": 1012,
+                "grnd_level": 1008,
+                "humidity": 46,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 59
+              },
+              "wind": {
+                "speed": 5.5,
+                "deg": 108,
+                "gust": 5.24
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 18:00:00"
+            },
+            {
+              "dt": 1770757200,
+              "main": {
+                "temp": 26.42,
+                "feels_like": 26.42,
+                "temp_min": 26.42,
+                "temp_max": 26.42,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1009,
+                "humidity": 69,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01d"
+                }
+              ],
+              "clouds": {
+                "all": 10
+              },
+              "wind": {
+                "speed": 3.72,
+                "deg": 97,
+                "gust": 7.31
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-10 21:00:00"
+            },
+            {
+              "dt": 1770768000,
+              "main": {
+                "temp": 24.01,
+                "feels_like": 24.61,
+                "temp_min": 24.01,
+                "temp_max": 24.01,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 82,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 6
+              },
+              "wind": {
+                "speed": 2.14,
+                "deg": 84,
+                "gust": 7.32
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 00:00:00"
+            },
+            {
+              "dt": 1770778800,
+              "main": {
+                "temp": 22.66,
+                "feels_like": 23.33,
+                "temp_min": 22.66,
+                "temp_max": 22.66,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 90,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 800,
+                  "main": "Clear",
+                  "description": "céu limpo",
+                  "icon": "01n"
+                }
+              ],
+              "clouds": {
+                "all": 0
+              },
+              "wind": {
+                "speed": 1.24,
+                "deg": 98,
+                "gust": 2.75
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 03:00:00"
+            },
+            {
+              "dt": 1770789600,
+              "main": {
+                "temp": 22.83,
+                "feels_like": 23.6,
+                "temp_min": 22.83,
+                "temp_max": 22.83,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1009,
+                "humidity": 93,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10n"
+                }
+              ],
+              "clouds": {
+                "all": 12
+              },
+              "wind": {
+                "speed": 0.49,
+                "deg": 122,
+                "gust": 2.02
+              },
+              "visibility": 10000,
+              "pop": 0.2,
+              "rain": {
+                "3h": 0.17
+              },
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-11 06:00:00"
+            },
+            {
+              "dt": 1770800400,
+              "main": {
+                "temp": 23.13,
+                "feels_like": 23.93,
+                "temp_min": 23.13,
+                "temp_max": 23.13,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 93,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 70
+              },
+              "wind": {
+                "speed": 1.37,
+                "deg": 83,
+                "gust": 4.2
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 0.7
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 09:00:00"
+            },
+            {
+              "dt": 1770811200,
+              "main": {
+                "temp": 30.15,
+                "feels_like": 31.61,
+                "temp_min": 30.15,
+                "temp_max": 30.15,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1011,
+                "humidity": 52,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 43
+              },
+              "wind": {
+                "speed": 2.94,
+                "deg": 102,
+                "gust": 4.2
+              },
+              "visibility": 10000,
+              "pop": 0.64,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 12:00:00"
+            },
+            {
+              "dt": 1770822000,
+              "main": {
+                "temp": 32.4,
+                "feels_like": 33.9,
+                "temp_min": 32.4,
+                "temp_max": 32.4,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 45,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 25
+              },
+              "wind": {
+                "speed": 4.95,
+                "deg": 124,
+                "gust": 4.4
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 15:00:00"
+            },
+            {
+              "dt": 1770832800,
+              "main": {
+                "temp": 31.39,
+                "feels_like": 32.1,
+                "temp_min": 31.39,
+                "temp_max": 31.39,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1009,
+                "humidity": 44,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 28
+              },
+              "wind": {
+                "speed": 4.88,
+                "deg": 121,
+                "gust": 4.59
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 18:00:00"
+            },
+            {
+              "dt": 1770843600,
+              "main": {
+                "temp": 25.69,
+                "feels_like": 26.19,
+                "temp_min": 25.69,
+                "temp_max": 25.69,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 72,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03d"
+                }
+              ],
+              "clouds": {
+                "all": 32
+              },
+              "wind": {
+                "speed": 3.16,
+                "deg": 113,
+                "gust": 6.52
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-11 21:00:00"
+            },
+            {
+              "dt": 1770854400,
+              "main": {
+                "temp": 23.08,
+                "feels_like": 23.56,
+                "temp_min": 23.08,
+                "temp_max": 23.08,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 81,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 57
+              },
+              "wind": {
+                "speed": 1.38,
+                "deg": 104,
+                "gust": 3.46
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 00:00:00"
+            },
+            {
+              "dt": 1770865200,
+              "main": {
+                "temp": 22.29,
+                "feels_like": 22.72,
+                "temp_min": 22.29,
+                "temp_max": 22.29,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 82,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03n"
+                }
+              ],
+              "clouds": {
+                "all": 45
+              },
+              "wind": {
+                "speed": 1.32,
+                "deg": 139,
+                "gust": 3
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 03:00:00"
+            },
+            {
+              "dt": 1770876000,
+              "main": {
+                "temp": 21.19,
+                "feels_like": 21.66,
+                "temp_min": 21.19,
+                "temp_max": 21.19,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 88,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 802,
+                  "main": "Clouds",
+                  "description": "nuvens dispersas",
+                  "icon": "03n"
+                }
+              ],
+              "clouds": {
+                "all": 46
+              },
+              "wind": {
+                "speed": 0.4,
+                "deg": 89,
+                "gust": 1.06
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-12 06:00:00"
+            },
+            {
+              "dt": 1770886800,
+              "main": {
+                "temp": 21.97,
+                "feels_like": 22.49,
+                "temp_min": 21.97,
+                "temp_max": 21.97,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 87,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 27
+              },
+              "wind": {
+                "speed": 0.79,
+                "deg": 326,
+                "gust": 0.42
+              },
+              "visibility": 10000,
+              "pop": 0.25,
+              "rain": {
+                "3h": 0.12
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 09:00:00"
+            },
+            {
+              "dt": 1770897600,
+              "main": {
+                "temp": 28.57,
+                "feels_like": 30.74,
+                "temp_min": 28.57,
+                "temp_max": 28.57,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1011,
+                "humidity": 63,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 24
+              },
+              "wind": {
+                "speed": 2.82,
+                "deg": 158,
+                "gust": 4.1
+              },
+              "visibility": 10000,
+              "pop": 0.47,
+              "rain": {
+                "3h": 0.54
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 12:00:00"
+            },
+            {
+              "dt": 1770908400,
+              "main": {
+                "temp": 30.96,
+                "feels_like": 33.16,
+                "temp_min": 30.96,
+                "temp_max": 30.96,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 53,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 61
+              },
+              "wind": {
+                "speed": 4.16,
+                "deg": 118,
+                "gust": 5.37
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.18
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 15:00:00"
+            },
+            {
+              "dt": 1770919200,
+              "main": {
+                "temp": 31,
+                "feels_like": 32.05,
+                "temp_min": 31,
+                "temp_max": 31,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1008,
+                "humidity": 47,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 56
+              },
+              "wind": {
+                "speed": 4.76,
+                "deg": 124,
+                "gust": 5.59
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 0.22
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 18:00:00"
+            },
+            {
+              "dt": 1770930000,
+              "main": {
+                "temp": 25.96,
+                "feels_like": 25.96,
+                "temp_min": 25.96,
+                "temp_max": 25.96,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 72,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 52
+              },
+              "wind": {
+                "speed": 3.08,
+                "deg": 108,
+                "gust": 6.37
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-12 21:00:00"
+            },
+            {
+              "dt": 1770940800,
+              "main": {
+                "temp": 23.39,
+                "feels_like": 24,
+                "temp_min": 23.39,
+                "temp_max": 23.39,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1011,
+                "humidity": 85,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 76
+              },
+              "wind": {
+                "speed": 1.48,
+                "deg": 84,
+                "gust": 3.72
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 00:00:00"
+            },
+            {
+              "dt": 1770951600,
+              "main": {
+                "temp": 22.6,
+                "feels_like": 23.24,
+                "temp_min": 22.6,
+                "temp_max": 22.6,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 89,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 95
+              },
+              "wind": {
+                "speed": 0.83,
+                "deg": 80,
+                "gust": 2.18
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 03:00:00"
+            },
+            {
+              "dt": 1770962400,
+              "main": {
+                "temp": 21.73,
+                "feels_like": 22.39,
+                "temp_min": 21.73,
+                "temp_max": 21.73,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1009,
+                "humidity": 93,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 97
+              },
+              "wind": {
+                "speed": 0.46,
+                "deg": 22,
+                "gust": 0.8
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-13 06:00:00"
+            },
+            {
+              "dt": 1770973200,
+              "main": {
+                "temp": 22.27,
+                "feels_like": 22.93,
+                "temp_min": 22.27,
+                "temp_max": 22.27,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 91,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 95
+              },
+              "wind": {
+                "speed": 0.41,
+                "deg": 307,
+                "gust": 0.42
+              },
+              "visibility": 10000,
+              "pop": 0.61,
+              "rain": {
+                "3h": 0.34
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 09:00:00"
+            },
+            {
+              "dt": 1770984000,
+              "main": {
+                "temp": 26.7,
+                "feels_like": 28.71,
+                "temp_min": 26.7,
+                "temp_max": 26.7,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1012,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 501,
+                  "main": "Rain",
+                  "description": "chuva moderada",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 96
+              },
+              "wind": {
+                "speed": 1.56,
+                "deg": 105,
+                "gust": 3.11
+              },
+              "visibility": 8028,
+              "pop": 1,
+              "rain": {
+                "3h": 3.23
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 12:00:00"
+            },
+            {
+              "dt": 1770994800,
+              "main": {
+                "temp": 27.99,
+                "feels_like": 30.92,
+                "temp_min": 27.99,
+                "temp_max": 27.99,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 72,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 501,
+                  "main": "Rain",
+                  "description": "chuva moderada",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 97
+              },
+              "wind": {
+                "speed": 2.92,
+                "deg": 111,
+                "gust": 3.93
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 5.08
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 15:00:00"
+            },
+            {
+              "dt": 1771005600,
+              "main": {
+                "temp": 29.33,
+                "feels_like": 31.6,
+                "temp_min": 29.33,
+                "temp_max": 29.33,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1009,
+                "humidity": 60,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 97
+              },
+              "wind": {
+                "speed": 3.62,
+                "deg": 127,
+                "gust": 4.67
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.04
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 18:00:00"
+            },
+            {
+              "dt": 1771016400,
+              "main": {
+                "temp": 25.54,
+                "feels_like": 26.11,
+                "temp_min": 25.54,
+                "temp_max": 25.54,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 75,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 2.6,
+                "deg": 110,
+                "gust": 6.13
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-13 21:00:00"
+            },
+            {
+              "dt": 1771027200,
+              "main": {
+                "temp": 23.26,
+                "feels_like": 23.97,
+                "temp_min": 23.26,
+                "temp_max": 23.26,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1011,
+                "humidity": 89,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 804,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 99
+              },
+              "wind": {
+                "speed": 1.58,
+                "deg": 94,
+                "gust": 4.08
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 00:00:00"
+            },
+            {
+              "dt": 1771038000,
+              "main": {
+                "temp": 22.74,
+                "feels_like": 23.34,
+                "temp_min": 22.74,
+                "temp_max": 22.74,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 87,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 803,
+                  "main": "Clouds",
+                  "description": "nublado",
+                  "icon": "04n"
+                }
+              ],
+              "clouds": {
+                "all": 60
+              },
+              "wind": {
+                "speed": 1.23,
+                "deg": 108,
+                "gust": 2.76
+              },
+              "visibility": 10000,
+              "pop": 0,
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 03:00:00"
+            },
+            {
+              "dt": 1771048800,
+              "main": {
+                "temp": 22.33,
+                "feels_like": 23.05,
+                "temp_min": 22.33,
+                "temp_max": 22.33,
+                "pressure": 1013,
+                "sea_level": 1013,
+                "grnd_level": 1009,
+                "humidity": 93,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10n"
+                }
+              ],
+              "clouds": {
+                "all": 74
+              },
+              "wind": {
+                "speed": 0.9,
+                "deg": 61,
+                "gust": 1.57
+              },
+              "visibility": 10000,
+              "pop": 0.31,
+              "rain": {
+                "3h": 0.17
+              },
+              "sys": {
+                "pod": "n"
+              },
+              "dt_txt": "2026-02-14 06:00:00"
+            },
+            {
+              "dt": 1771059600,
+              "main": {
+                "temp": 22.37,
+                "feels_like": 23.12,
+                "temp_min": 22.37,
+                "temp_max": 22.37,
+                "pressure": 1015,
+                "sea_level": 1015,
+                "grnd_level": 1010,
+                "humidity": 94,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 93
+              },
+              "wind": {
+                "speed": 0.7,
+                "deg": 33,
+                "gust": 1.23
+              },
+              "visibility": 10000,
+              "pop": 0.8,
+              "rain": {
+                "3h": 0.82
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 09:00:00"
+            },
+            {
+              "dt": 1771070400,
+              "main": {
+                "temp": 26.46,
+                "feels_like": 26.46,
+                "temp_min": 26.46,
+                "temp_max": 26.46,
+                "pressure": 1016,
+                "sea_level": 1016,
+                "grnd_level": 1011,
+                "humidity": 78,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 96
+              },
+              "wind": {
+                "speed": 1.47,
+                "deg": 107,
+                "gust": 2.69
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 3
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 12:00:00"
+            },
+            {
+              "dt": 1771081200,
+              "main": {
+                "temp": 29.92,
+                "feels_like": 32.49,
+                "temp_min": 29.92,
+                "temp_max": 29.92,
+                "pressure": 1014,
+                "sea_level": 1014,
+                "grnd_level": 1010,
+                "humidity": 59,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 3.37,
+                "deg": 151,
+                "gust": 3.84
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 2.46
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 15:00:00"
+            },
+            {
+              "dt": 1771092000,
+              "main": {
+                "temp": 29.4,
+                "feels_like": 31.07,
+                "temp_min": 29.4,
+                "temp_max": 29.4,
+                "pressure": 1012,
+                "sea_level": 1012,
+                "grnd_level": 1008,
+                "humidity": 56,
+                "temp_kf": 0
+              },
+              "weather": [
+                {
+                  "id": 500,
+                  "main": "Rain",
+                  "description": "chuva leve",
+                  "icon": "10d"
+                }
+              ],
+              "clouds": {
+                "all": 100
+              },
+              "wind": {
+                "speed": 4.04,
+                "deg": 143,
+                "gust": 4.45
+              },
+              "visibility": 10000,
+              "pop": 1,
+              "rain": {
+                "3h": 0.39
+              },
+              "sys": {
+                "pod": "d"
+              },
+              "dt_txt": "2026-02-14 18:00:00"
+            }
+          ],
+          "city": {
+            "id": 3468031,
+            "name": "Camaçari",
+            "coord": {
+              "lat": -12.7001,
+              "lon": -38.3266
+            },
+            "country": "BR",
+            "population": 188758,
+            "timezone": -10800,
+            "sunrise": 1770625832,
+            "sunset": 1770671077
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Cron 06h": {
+      "main": [
+        [
+          {
+            "node": "Eventos do Dia",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Obter clima em Abrantes",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Tempo até Trabalho",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Noticias do Dia",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Versiculo Biblico",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Obter clima em Salvador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eventos do Dia": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Tempo até Trabalho": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Noticias do Dia": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Versiculo Biblico": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Enviar Email": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "Obter clima em Abrantes": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obter clima em Salvador": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ef3c886f-3d46-43ee-b62a-48a583218506",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "acfc86de5a1ff0a954998f6aa54fa93d06386b76648e7481b6ddda2968a141a3"
+  },
+  "id": "wEflFeRr4kLu0-x1aCYE7",
+  "tags": []
+}
